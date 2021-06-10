@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết bài báo</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Danh mục</div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Trang chủ</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Hội đồng</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Nghiên cứu sinh</a><a class="list-group-item list-group-item-action bg-light" href="#!">Đề tài</a>
+            </div>
+        </div> -->
+        <div id="page-content-wrapper">
+            <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <button class="btn btn-primary" id="menu-toggle" style=" border-radius: 10px; width: 12%;">Danh mục</button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 140px;">
+                </div>
+            </nav> -->
+            <div class="container-fluid">
+                <h3 style="margin-top:20px; font-size: xx-large; margin-left: 12.5%;">Chi tiết bài báo </h3>
+                <div th:if="${baibao}">
+                    <div class="table-responsive" style="margin-top: 20px;">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr style="background-color: #BE81F7;">
+                                    <th scope="col">Tên bài báo</th>
+                                    <th scope="col">Nội dung</th>
+                                    <th scope="col">Ngày đăng</th>
+                                    <th scope="col">Đề tài thực hiện</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td th:text="${detai.getTenDeTai()}"></td>
+                                    <td th:text="${baibao.getNoiDung()}" style="max-width:350px;"></td>
+                                    <td th:text="${baibao.getNgayDang()}"></td>
+                                    <!-- cai ni bi loi, chua biet tai soa -->
+                                    <td><a th:href="@{'/chiTietDeTai/'+ ${pageold} + '/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px;  width: 35%; text-align: center; margin-left: 2%;">Chi tiết</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a th:href="@{'/danhSachBaiBao/' + ${viewer.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px; width: 10%; margin-left: 12.5%;">Trở về</a>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container-fluid padding">
+                <div class="row text-center padding">
+                    <div class="col-12">
+                        <h5>Liên lạc với nhóm</h5>
+                    </div>
+                    <div class="col-md-4 social padding">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="col-md-4 social padding">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <div class="col-md-4 social padding">
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+</body>
+
+</html>

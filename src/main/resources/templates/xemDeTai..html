@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Xem đề tài</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+            <div class="container-fluid">
+                <a href="#" class="navbar-branch">
+                    <img src="../static/img/dhbk.png" height="60"  alt="#">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+              <span class="navba-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive;">
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Chua sua  -->
+                        <li class="nav-item">
+                            <a class="nav-link">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">Danh sách đề tài</a>
+                        </li> 
+                        <li class="nav-item">
+                            <a class="nav-link">Danh sách bài báo</a>
+                        </li>
+
+                        <!-- <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tài khoản
+                        </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="d-flex" id="wrapper">
+        <!-- <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Danh mục</div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Trang chủ</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Hội đồng</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Nghiên cứu sinh</a><a class="list-group-item list-group-item-action bg-light" href="#!">Đề tài</a>
+            </div>
+        </div> -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid form-text" style="margin-left: 29%;">
+                <h3 style="margin-top: 20px; font-size: xx-large; color:black;">Đề tài</h3>
+                <div style="margin-top: 20px;">
+                    <p th:text="'Tên : ' + ${detai.getTenDeTai()}"></p>
+                    <label for="" style="font-size: larger; color:black;">Mô tả</label>
+                    <textarea th:text=" ${detai.getMoTa()}" class="form-control" style="height: 35%; width: 35%;"></textarea>
+                    <!--       <p th:text="'mo ta : ' + ${detai.getMoTa()}"></p>-->
+                    <div>
+                        <span th:if="${nguoiHuongDan.getTen()}" th:text="'Người hướng dẫn : ' + ${nguoiHuongDan.getTen()}"></span>
+                        <span th:if="!${nguoiHuongDan.getTen()}" th:text="'Người hướng dẫn : Chưa có người hướng dẫn'"></span>
+                    </div>
+                    <div>
+                        <p th:if="${nguoithuchien.getTen()}" th:text="'Người thực hiện đề tài : ' + ${nguoithuchien.getTen()}"></p>
+                        <p th:if="!${nguoithuchien.getTen()}" th:text="'Người thực hiện đề tài : Chưa có người thực hiện'"></p>
+                    </div>
+                    <label style=" font-size: larger; color:black;">Lĩnh vực :</label>
+                    <select>
+                        <option th:each="linhvuc : ${linhVucCuaDeTai}" th:text="${linhvuc.getTenLinhVuc()}"></option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="col-sm-12" style="margin-left: 29%;">
+                <a th:href="@{'/' + ${pageold} + '/'+ ${detai.getIDDeTai()}}" class="btn btn-primary" style="margin-top: 20px; border-radius: 10px; width: 10%;">Trở về</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+
+            </div>
+        </div>
+    </div>
+    <!-- <div class="container-fluid padding">
+        <div class="row text-center padding">
+            <div class="col-12">
+                <h5>Liên lạc với nhóm</h5>
+            </div>
+            <div class="col-md-4 social padding">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+            </div>
+            <div class="col-md-4 social padding">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="col-md-4 social padding">
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div> -->
+    </div>
+    </div>
+
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+</body>
+
+</html>

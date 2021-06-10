@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin nghiên cứu sinh</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <div class="bg-light border-right" id="sidebar-wrapper">
+        </div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid form-text" style="margin-left: 29%;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 style="margin-top: 20px;font-size: xx-large;color: black; ">Thông tin cá nhân</h5>
+                    </div>
+                    <div class="col-sm-12">
+                        <!-- Form sửa thông tin -->
+                        <form th:object="${user}">
+                            <!-- Têm -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger;color: black; ">Tên</label>
+                                <span th:field="*{Ten}">
+                                    <input name="Ten" type="text" th:value="*{Ten}" class="form-control" style="height: 35%; width: 35%;">
+                            </span>
+                            </div>
+                            <!-- Ngày sinh -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger;color: black; ">Ngày sinh</label>
+                                <span th:field="*{NgaySinh}">
+                                    <input name="NgaySinh" type="text" th:value="*{NgaySinh}" class="form-control" style="height: 35%; width: 35%;">
+                            </span>
+                            </div>
+
+                            <!-- Giới tính -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger;color: black; ">Giới tính: </label>
+                                <span th:field="*{GioiTinh}">
+                                    <input type="hidden" name="GioiTinh" th:value="*{GioiTinh}">
+                                    <span style="color: black;"> Nam
+                                        <input type="radio" name="checkboxSex" value="nam" th:checked="*{GioiTinh} ? 'checked'" />
+                                    </span>
+                                <span style="color: black;"> Nữ
+                                        <input type="radio" name="checkboxSex" value="nu"  th:checked="!*{GioiTinh} ? 'checked'" />
+                                    </span>
+                                </span>
+                            </div>
+                            <!--Địa chỉ( Sửa label thành span)  -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger; color: black; margin-top: -5px;">Địa chỉ</label>
+                                <span th:field="*{DiaChi}">
+                                    <input name="DiaChi" type="text" th:value="*{DiaChi}" class="form-control" style="height: 35%; width: 35%;">
+                            </span>
+                            </div>
+                            <!-- Số điện thoại -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger; color: black;">Số điện thoại</label>
+                                <span th:field="*{SDT}">
+                                    <input name="SDT" type="text" th:value="*{SDT}" class="form-control" style="height: 35%; width: 35%;">
+                            </span>
+                            </div>
+                            <!-- Gmail -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger;color: black; ">Gmail</label>
+                                <span th:field="*{Gmail}">
+                                    <input name="Gmail" type="text" th:value="*{Gmail}" class="form-control"style="height: 35%; width: 35%;">
+                            </span>
+                            </div>
+                            <!-- Nút sửa thông tin -->
+                            <!-- Trở về(back) chưa xong -->
+                            <a th:href="@{ '/'+ ${pageold} +'/' + ${nguoihuongdan.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="container-fluid padding">
+                <div class="row text-center padding">
+                    <div class="col-12">
+                        <h5>Liên lạc với nhóm</h5>
+                    </div>
+                    <div class="col-md-4 social padding">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="col-md-4 social padding">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <div class="col-md-4 social padding">
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <div class="container form-text">
+
+    </div>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm đề tài</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+
+        <div class="bg-light border-right" id="sidebar-wrapper">
+        </div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid form-text" style="margin-left: 29%;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 style="margin-top: 20px; font-size: xx-large; color: black;">Thêm đề tài</h5>
+                    </div>
+                    <div class="col-sm-12">
+                        <!-- Form sửa thông tin -->
+                        <form name="suadetai" th:action="@{'/themDeTai/' + ${viewer.getTaiKhoan()}}" th:object="${detai}" method="post">
+                            <!-- Têm -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger; color: black;">Tên đề tài</label>
+                                <span th:field="*{TenDeTai}">
+                                    <input name="TenDeTai" type="text" th:value="*{TenDeTai}" class="form-control" style="height: 35%; width: 35%;">
+                                </span>
+                            </div>
+                            <!-- mô tả -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger; color: black;">Mô tả</label>
+                                <span th:field="*{MoTa}">
+                                    <textarea name="MoTa" th:text="*{MoTa}" class="form-control"style="height: 35%; width: 35%;"></textarea>
+                                </span>
+                            </div>
+
+                            <!-- Nút sửa thông tin -->
+                            <input type="submit" value="Thêm" class="btn btn-primary" name="btnsubmit" style="margin-top: 20px; border-radius: 10px;width: 10%;">
+                            <!-- Trở về(back) chưa xong -->
+                            <a th:href="@{'/' + ${pageold} + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+</body>
+
+</html>

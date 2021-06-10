@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết đề tài</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <div class="bg-light border-right" id="sidebar-wrapper">
+        </div>
+        <div id="page-content-wrapper" class="container-fluid">
+            <div class="container-fluid" style="margin-left: 29%;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 style="margin-top: 20px;">Chi tiết đề tài</h3>
+                        <div>
+                            <p th:text="'Tên : ' + ${detai.getTenDeTai()}"></p>
+                            Mô tả : <textarea th:text=" ${detai.getMoTa()}" class="form-control" style="width: 35%; height: 35%;"></textarea>
+                            <!--       <p th:text="'mo ta : ' + ${detai.getMoTa()}"></p>-->
+                            <div>
+                                <span th:if="${nguoiHuongDan.getTen()}" th:text="'Người hướng dẫn : ' + ${nguoiHuongDan.getTen()}"></span>
+                                <span th:if="!${nguoiHuongDan.getTen()}" th:text="'Người hướng dẫn : Chưa có người hướng dẫn '"></span>
+                            </div>
+                            <p>
+                                <span th:if="${detai.getTrangThai().equals('OK')}" th:text="'Trạng thái : OK'"></span>
+                                <span th:if="${detai.getTrangThai().equals('dangxet')}" th:text="'Trạng thái : Đang xét'"></span>
+                                <span th:if="${detai.getTrangThai().equals('chuaxet')}" th:text="'Trạng thái : Chưa xét'"></span>
+                            </p>
+                            <div>
+                                <p th:if="${nguoithuchien.getTen()}" th:text="'Người thực hiện đề tài : ' + ${nguoithuchien.getTen()}"></p>
+                                <p th:if="!${nguoithuchien.getTen()}" th:text="'Người thực hiện đề tài : Chưa có người thực hiện'"></p>
+                            </div>
+                            Lĩnh vực :
+                            <select>
+                                <option th:each="linhvuc : ${linhVucCuaDeTai}" th:text="${linhvuc.getTenLinhVuc()}" class="form-control"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12; container-fluid">
+                        <div th:if="${detai.getTrangThai().equals('dangxet') && viewer.getRole().equals('2')} ">
+                            <!-- Form sửa thông tin -->
+                            <form name="formPheDuyet" th:action="@{'/chiTietDeTai/' + ${pageold} + '/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" method="post">
+                                <!-- span th:field="${status}"> -->
+                                <input type="hidden" name="status" th:value="${status}">
+                                </span>
+                                <input type="submit" name="Pheduyet" value="Phê duyệt" onclick="isClicked(this.name)" class="btn btn-primary" style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">
+                                <input type="submit" name="Huybo" value="Hủy bỏ" onclick="isClicked(this.name)" class="btn btn-primary" style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">
+                            </form>
+                        </div>
+                        <div th:if="${viewer.getRole().equals('2')}">
+                            <a id="xoaDeTai" th:href="@{ '/xoaDeTai/'  + ${detai.getIDDeTai()} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Xoá đề tài</a>
+                        </div>
+                        <div th:if="${viewer.getRole().equals('3') && pageold.equals('listHuongDan')}">
+                            <label for="" style="margin-top: 20px;">Tiến độ: </label>
+                            <textarea th:if="${plane}" th:text="${plane}" class="form-control" style="width: 35%; height: 35%;">
+                            </textarea>
+                            <textarea th:if="!${plane}" th:text="''" class="form-control" style="width: 35%; height: 35%;margin-top: 10px;">
+                            </textarea>
+                        </div>
+                        <div th:if="${viewer.getRole().equals('4') && pageold.equals('deTaiDangThucHien')}">
+                            Tiến độ:
+                            <form name="updateTienDo" th:action="@{'/chiTietDeTai/' + ${pageold} + '/'+ ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" onsubmit="return validateForm()" method="post">
+                                <span th:field="${newTienDo}">
+                                <input type="hidden" name="newTienDo" th:value="${newTienDo}">
+                            </span>
+                                <textarea name="textTienDo" th:if="${plane}" th:text="${plane}" class="form-control" style="width: 50%; height: 50%;"></textarea>
+                                <textarea name="textTienDo" th:if="!${plane}" th:text="''" class="form-control" style="width: 50%; height: 50%;"></textarea>
+                                <input type="submit" value="Update tiến độ" class="btn btn-primary" style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">
+                            </form>
+                        </div>
+                        <div th:if="${pageold.equals('deTaiDangThucHien')}">
+                            <a th:href="@{ '/suaDeTai/' + '/' +  ${pageold}  + '/' + ${detai.getIDDeTai()} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Sửa đề tài</a>
+                        </div>
+                        <div th:if="${viewer.getRole().equals('3') && pageold.equals('listHuongDan')}">
+                            <a th:href="@{ '/suaDeTai/' + '/' +  ${pageold}  + '/' + ${detai.getIDDeTai()} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Sửa đề tài</a>
+                        </div>
+                        <div th:if="${pageold.equals('chiTietBaiBao')}">
+                            <a th:href="@{ '/' + ${pageold} + '/'+ ${detai.getIDDeTai()} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
+                        </div>
+                        <div th:if="${pageold.equals('deTaiDangThucHien')} ">
+                            <a th:if="${viewer.getRole().equals( '3')} " th:href="@{ '/' + ${pageold} + '/canbo/' + ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
+                            <a th:if="${viewer.getRole().equals( '4')} " th:href="@{ '/' + ${pageold} + '/nghiencuusinh/' + ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về </a>
+                        </div>
+                        <div th:if="${!pageold.equals('chiTietBaiBao') && !pageold.equals('deTaiDangThucHien')}">
+                            <a th:href="@{ '/' + ${pageold} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <script th:inline="javascript">
+        var detai = [
+            [$ {
+                detai
+            }]
+        ];
+
+        function isClicked(name) {
+            document.forms["formPheDuyet"]["status"].value = name;
+        }
+
+        function validateForm() {
+            var x = document.getElementsByName("textTienDo")[0].value;
+            document.forms["updateTienDo"]["newTienDo"].value = x;
+            var confirmForm = confirm("Bạn chắc chắn muốn thay đổi tiến độ không ?");
+            if (confirmForm) {
+                alert("Cập nhật tiến độ thành công");
+                return true;
+            }
+            return false;
+            // console.log(document.forms["updateTienDo"]["newTienDo"].value);
+        }
+        document.getElementById("xoaDeTai").addEventListener("click", function(event) {
+            var confirmForm = confirm("Bạn chắc chắn muốn xóa đề tài " + detai.tenDeTai);
+            if (!confirmForm) {
+                event.preventDefault();
+            } else {
+                alert("Xóa đề tài thành công");
+            }
+        })
+    </script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
+</body>
+
+</html>
