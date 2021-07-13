@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sửa đề tài</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/SuaDeTai.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+
+</head>
+
+<body>
+    <div class="suadetai" >
+        <div class="">
+            <h3>Sửa đề tài</h3>
+            <!-- Form sửa thông tin -->
+            <form name="suadetai" th:action="@{'/suaDeTai/' + ${pageold} + '/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" th:object="${detai}" method="post" onsubmit="return validateForm()">
+                <!-- Têm -->
+                <div class="form_group">
+                    <label >Tên đề tài</label>
+                    <span th:field="*{TenDeTai}">
+                        <input  class="input_text form-control" name="TenDeTai" type="text" th:value="*{TenDeTai}" >
+                    </span>
+                </div>
+                <!-- Ngày sinh -->
+                <div class="form_group">
+                    <label>Mô tả</label>
+                    <span th:field="*{MoTa}">
+                        <span th:field="*{MoTa}">
+                            <textarea class="input_text" name="MoTa" th:text="*{MoTa}" class="" ></textarea>
+                        </span>
+                    </span>
+                </div>
+
+                <div class="form_group-3">
+                    <label for="" >Lĩnh vực</label>
+                    <select>
+                        <option th:each="linhvuc : ${linhVucCuaDeTai}" th:text="${linhvuc.getTenLinhVuc()}"></option>
+                    </select>
+                </div>
+
+                <!-- Nút sửa thông tin -->
+                <p class="button">
+                    <input type="submit" value="Thay đổi" class="btn btn-primary" >
+                    <!-- Trở về(back) chưa xong -->
+                    <a th:href="@{ '/chiTietDeTai/' + ${pageold} + '/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}} " class="btn btn-dark " >Trở về</a>
+                </p>
+                
+            </form>
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        function validateForm() {
+            var confirmForm = confirm("Bạn chắc chắn muốn thay đổi chi tiết đề tài không ?");
+            if (confirmForm) {
+                alert("Thay đổi thành công");
+                return true;
+            }
+            return false;
+            // console.log(document.forms["updateTienDo"]["newTienDo"].value);
+        }
+    </script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
+</body>
+
+</html>

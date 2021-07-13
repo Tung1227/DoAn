@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm đề tài</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/SuaDeTai.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+
+</head>
+
+<body>
+    
+    <div class="suadetai">
+            <div class="">
+                <h3 class="signup-heading">Thêm đề tài</h5>
+                    <!-- Form sửa thông tin -->
+                    <form name="suadetai" th:action="@{'/themDeTai/' + ${viewer.getTaiKhoan()}}" th:object="${detai}" method="post" class="form_group">
+                        <!-- Têm -->
+                        <div class="form_group">
+                            <label for="" class="form_label">Tên đề tài</label>
+                            <span th:field="*{TenDeTai}">
+                            <input name="TenDeTai" type="text" th:value="*{TenDeTai}" class="input_text">
+                        </span>
+                        </div>
+                        <!-- mô tả -->
+                        <div class="form_group">
+                            <label for="" class="form_label">Mô tả</label>
+                            <span th:field="*{MoTa}">
+                            <textarea name="MoTa" th:text="*{MoTa}" class="input_text"></textarea>
+                        </span>
+                        </div>
+                        <!-- Nút sửa thông tin -->
+                        <p class="button">
+                            <input class="btn btn-primary" type="submit" value="Thêm" class="form_submit" name="btnsubmit">
+                        <!-- Trở về(back) chưa xong  class="btn btn-primary" style="border-radius: 10px; width: 25%; height: 50%;"-->
+                        <a class="btn btn-dark" th:href="@{'/' + ${pageold} + '/' + ${viewer.getTaiKhoan()}}" class="form_link">Trở về</a>
+                        </p>
+                        
+                    </form>
+            </div>
+    </div>
+        <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+</body>
+
+</html>

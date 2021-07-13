@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng kí làm nghiên cứu</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style2.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/responsive.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <a href="#" , class="navbar-branch">
+            <img src="../static/img/dhbk.png" height="60" alt="#">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="navbar-collapse container-fluid" style="margin-right: 7%;">
+            <ul id="nav" class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="#">Trang chủ</a></li>
+                <li><a class="nav-link " th:href="@{'/danhSachBaiBao/' + ${user.getTaiKhoan()}}">Danh sách bài báo</a></li>
+                <li><a href="#">Đề tài</a>
+                    <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
+                        <li>
+                            <a th:href="@{'/themDeTai/' + ${user.getTaiKhoan()}}" style="width:100%">Thêm đề tài mới</a>
+                        </li>
+                        <li>
+                            <a th:href="@{'/deTaiDangThucHien/nghiencuusinh/' + ${user.getTaiKhoan()}}" style="width:100%">Đề tài đang thực hiện</a>
+                        </li>
+                        <li>
+                            <a th:href="@{'/deTaiDaLamDuoc/' + ${user.getTaiKhoan()}}" style="width:100%">Danh sách đề tài đã làm được</a>
+                        </li>
+                        <li><a class="nav-link" th:href="@{'/dangKyLamNghienCuu/' + ${user.getTaiKhoan()}}">Đăng kí làm nghiên cứu</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Tài khoản</a>
+                    <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
+                        <li style="height: 40%; width: 100%;">
+                            <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}">Đổi mật khẩu</a>
+                        </li>
+                        <li>
+                            <a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}">Đổi thông tin cá nhân</a>
+                        </li>
+                        <li>
+                            <a th:href="@{'/login'}">Đăng xuất</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- End : Nav -->
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <h3 style="margin-top: 20px; margin-left: 12.5%;">Danh sách tên đề tài đăng kí </h3>
+        <form name="dangKyLamDeTai" th:action="@{'/dangKyLamNghienCuu/' + ${user.getTaiKhoan()}}" onsubmit="return validateForm()" method="post">
+            <div class="table-responsive" style="margin-top: 20px;">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr style="background-color: #BE81F7;">
+                            <th scope="col">Tên đề tài</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Chi tiết đề tài</th>
+                            <th scope="col">Đăng kí</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <tr th:each="detai : ${deTaiCoThe}">
+                                <td th:text="${detai.getTenDeTai()}"></td>
+                                <td>
+                                    <span th:if="${detai.getTrangThai().equals('OK')}" th:text="'OK'"></span>
+                                    <span th:if="${detai.getTrangThai().equals('dangxet')}" th:text="'Đang xét'"></span>
+                                    <span th:if="${detai.getTrangThai().equals('chuaxet')}" th:text="'Chưa xét'"></span>
+                                </td>
+                                <td><a th:href="@{'/chiTietDeTai/dangKyLamNghienCuu/' + ${detai.getIDDeTai()} + '/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px;  width: 35%; text-align: center; margin-left: 5%;">Chi tiết</a></td>
+                                <td><input type="checkbox" class="checkList" th:value="${detai.getIDDeTai()}" style="border-radius: 10px; margin-top: 10px; width: 40%;height: 20px"></td>
+                            </tr>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6" style="margin-left: 12%;">
+                        <span th:field="${checked}">
+                            <input type="hidden" name="checked" th:value="${checked}">
+                        </span>
+                        <input type="submit" value="Đăng kí" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 20%; margin-left: -10px;">
+                        <a th:href="@{'/' + ${pageold} +'/' + ${user.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 20%;">Trở về</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div style="margin-top: 17%;">
+        <hr>
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12">
+                    <h5>Liên lạc với nhóm</h5>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="https://www.facebook.com/Duawww"><i class="fab fa-facebook"></i></a>
+                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="https://www.instagram.com/duaww/"><i class="fab fa-instagram"></i></a>
+                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="https://www.youtube.com/watch?v=LMnJG3Oxrrw"><i class="fab fa-youtube"></i></a>
+                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+        <script th:inline="javascript">
+            function validateForm() {
+                let Checked = "";
+                var inputElements = document.getElementsByClassName('checkList');
+                for (var i = 0; i < inputElements.length; i++) {
+                    if (inputElements[i].checked) {
+                        // checkedValue = inputElements[i].value;
+                        Checked = Checked + "/" + inputElements[i].value;
+                    }
+                }
+                var confirmForm = confirm("Bạn có chắc muốn làm các đề tài này");
+                if (!confirmForm) {
+                    return false;
+                }
+                document.forms["dangKyLamDeTai"]["checked"].value = Checked;
+                alert("Đăng kí thành công");
+                return true;
+            }
+        </script>
+        <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+</body>
+
+</html>

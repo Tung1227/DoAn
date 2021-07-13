@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng kí</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styleAddTk.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+</head>
+
+<body>
+    <div class=" signup">
+        <h3 class="signup-heading">Đăng ký</h3>
+        <!-- Form sửa thông tin -->
+        <form name="addAccount" th:action="@{'/dangky'}" th:object="${user}" method="POST" onsubmit="return validateForm()" class="form_group">
+            <!-- Têm -->
+            <div class="form_group">
+                <label for="" class="form_label">Tên</label>
+                <span th:field="*{Ten}">
+                    <input name="Ten" type="text" th:value="*{Ten}" class="form_input">
+                </span>
+            </div>
+            <!-- Ngày sinh -->
+            <div class="form_group">
+                <label for="" class="form_label">Ngày sinh</label>
+                <span th:field="*{NgaySinh}">
+                    <input name="NgaySinh" type="date" th:value="*{NgaySinh}" class="form_input">
+                </span>
+            </div>
+
+            <!-- Giới tính -->
+            <div class="form_group">
+                <span th:field="*{GioiTinh}">
+                    <label for="" class="form_label">Giới tính: </label>
+                    <input type="hidden" name="GioiTinh" th:value="*{GioiTinh}">
+                    <span class="form_label"> Nam
+                        <input type="radio" name="checkboxSex" value="nam" />
+                    </span> 
+                <span class="form_label"> Nữ
+                    <input type="radio" name="checkboxSex" value="nu"  />
+                </span>
+                </span>
+            </div>
+
+            <!-- Gmail -->
+            <div class="form_group">
+                <label for="" class="form_label">Gmail</label>
+                <span th:field="*{Gmail}">
+                    <input name="Gmail" type="text" th:value="*{Gmail}" class="form_input">
+                </span>
+            </div>
+
+            <!-- Số điện thoại -->
+            <div class="form_group ">
+                <label for=" " class="form_label">Số điện thoại</label>
+                <span th:field="*{SDT}">
+                    <input name="SDT" type="text" th:value="*{SDT}" class="form_input">
+                </span>
+            </div>
+
+            <!--Địa chỉ( Sửa label thành span)  -->
+            <div class="form_group ">
+                <label for=" " class="form_label">Địa chỉ</label>
+                <span th:field="*{DiaChi}">
+                    <input name="DiaChi" type="text" th:value="*{DiaChi}" class="form_input">
+                </span>
+            </div>
+
+            <!-- Tài khoản -->
+            <div class="form_group">
+                <label for="" class="form_label">Tài khoản</label>
+                <span th:field="*{TaiKhoan}">
+                    <input name="TaiKhoan" type="text" th:value="*{TaiKhoan}" class="form_input">
+                </span>
+            </div>
+
+            <!-- mật khẩu -->
+            <div class="form_group ">
+                <label for="" class="form_label">Mật khẩu</label>
+                <span th:field="*{MatKhau}">
+                    <input name="MatKhau" type="password" th:value="*{MatKhau}" class="form_input">
+                </span>
+            </div>
+
+            <div class="form_group ">
+                <label for=" " class="form_label">Xác nhận mật khẩu</label>
+                <span>
+                    <input name="XacNhanMatKhau" type="password" class="form_input">
+                </span>
+            </div>
+            <p class="button">
+                <!-- Nút sửa thông tin -->
+                <button type="submit" class="btn btn-outline-primary">Đăng kí</button>
+                <!-- Trở về(back) chưa xong -->
+                <a th:href="@{ '/login'}" class="btn btn-outline-dark">Trở về</a>
+            </p>
+            
+        </form>
+    </div>
+    <script th:inline="javascript">
+        function validateForm() {
+            var danhSachTaiKhoan = [
+                [$ {
+                    danhSachTaiKhoan
+                }]
+            ];
+            var form = document.forms["addAccount"];
+            var input = document.getElementsByTagName("input");
+            var arrayConverted = Object.values(input);
+            var filterArray = arrayConverted.filter((element) => {
+                return element.type !== "hidden";
+            });
+            var tempSex = 0;
+            for (var i = 0; i < filterArray.length; i++) {
+                if (filterArray[i].type === "radio") {
+                    if (filterArray[i].name === "checkboxSex" && filterArray[i].checked === false) {
+                        tempSex++;
+                    }
+                } else {
+                    if (filterArray[i].value === "") {
+                        alert("Xin hãy nhập đầy đủ thông tin");
+                        return false;
+                    } else if (filterArray[i].value.length < 8) {
+                        alert("Thông tin nhập vào phải từ 8 kí tự trở lên");
+                        return false;
+                    }
+                }
+
+                if (tempSex == 2) {
+                    alert("Xin hãy chọn giới tính");
+                    return false;
+                }
+            }
+
+            var account = form["TaiKhoan"].value;
+            var password = form["MatKhau"].value;
+            var confirmPassword = form["XacNhanMatKhau"].value;
+
+
+
+            if (danhSachTaiKhoan.includes(account)) {
+                alert("Tài khoản đã tồn tại xin hay chọn tài khoản khác");
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Xác nhận mật khẩu không trùng khớp");
+                return false;
+            }
+            let checkboxSex = document.getElementsByName("checkboxSex");
+
+            for (var i = 0; i < checkboxSex.length; i++) {
+                if (checkboxSex[i].checked === true) {
+                    // alert(checkbox[i].value);
+                    if (checkboxSex[i].value == "nam") {
+                        console.log("nam");
+                        document.forms["addAccount"]["GioiTinh"].value = "true";
+                    } else {
+                        console.log("nu");
+                        document.forms["addAccount"]["GioiTinh"].value = "false";
+                    }
+                }
+            }
+            alert("Đăng ký thành công");
+            return true;
+        }
+    </script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
+</body>
+
+</html>

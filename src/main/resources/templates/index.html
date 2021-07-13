@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nghiên cứu khoa học</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" /> -->
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <!-- my css -->
+
+
+</head>
+
+<body>
+    <!--Main Navigation-->
+    <header>
+        <style>
+            /* Carousel styling */
+            
+            #introCarousel,
+            .carousel-inner,
+            .carousel-item,
+            .carousel-item.active {
+                height: 80vh;
+            }
+            
+            .carousel-item:nth-child(1) {
+                background-image: url('');
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center center;
+            }
+            
+            .carousel-item:nth-child(2) {
+                background-image: url('');
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center center;
+            }
+            
+            .carousel-item:nth-child(3) {
+                background-image: url('');
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center center;
+            }
+            /* Height for devices medium than 576px */
+            
+            @media (min-width: 992px) {
+                #introCarousel {
+                    margin-top: -58.59px;
+                    max-width: 50%;
+                    max-height: 25%;
+                }
+            }
+            
+            .navbar .nav-link {
+                color: rgb(8, 0, 0) !important;
+            }
+        </style>
+
+        <!-- Navbar -->
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+                <div class="container-fluid">
+                    <a href="#" class="navbar-branch">
+                        <img src="../static/img/DHBK.jpg" height="50" alt="#">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                  <span class="navba-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive;">
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Chua sua  -->
+                            <li class="nav-item">
+                                <a class="nav-link">Trang chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">Danh sách đề tài</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">Danh sách bài báo</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Navbar -->
+
+        <!-- Carousel wrapper -->
+        <div id="slides" class="carousel slide container-fluid" data-ride="carousel">
+            <ul class="carousel-indicators">
+                <li data-target="#slides" data-slide-to="0" , class="active"></li>
+                <li data-target="#slides" data-slide-to="1"></li>
+                <li data-target="#slides" data-slide-to="2"></li>
+            </ul>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="../static/img/anhtruongfinal.jpg" style="margin-top: 15px; height: 100%; width: 100%;">
+                </div>
+                <div class="carousel-item">
+                    <img src="../static/img/dut1 (1).jpg" style="margin-top: 15px;height: 100%; width: 100%;">
+                </div>
+                <div class="carousel-item">
+                    <img src="../static/img/gv1.jpg " style="margin-top: 15px; height: 100%; width: 100%;">
+                </div>
+            </div>
+        </div>
+        <!-- Carousel wrapper -->
+    </header>
+    <!--Main Navigation-->
+    <div class="mask" style="background-color: rgb(255, 253, 253);">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class="text-black text-center" style="margin-top: 3%;">
+                        <h1 class="mb-3" style="margin-top: -12px;">Chào mừng bạn đến với Website quản lý đề tài NCKH</h1>
+                        <h5 class="mb-4">Website cung cấp đủ các yêu cầu mà người dùng muốn sử dụng</h5>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <p style="text-align: center;">
+                        <a th:href="@{'/login'}" class="btn btn-outline-info" style="border-radius: 10px; ">Đăng nhập</a>
+                        <a th:href="@{'/dangky'}" class="btn btn-outline-info" style="border-radius: 10px; ">Đăng kí</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Main layout-->
+    <main class="mt-5">
+        <div class="container-fluid">
+            <!--Section: Content-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="slides" class="carousel slide container-fluid" data-ride="carousel">
+                        <ul class="carousel-indicators">
+                            <li data-target="#slides" data-slide-to="0" , class="active"></li>
+                            <li data-target="#slides" data-slide-to="1"></li>
+                            <li data-target="#slides" data-slide-to="2"></li>
+                            <li data-target="#slides" data-slide-to="3"></li>
+                            <li data-target="#slides" data-slide-to="4"></li>
+                        </ul>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="../static/img/dut.img" style="margin-top: 15px; height: 75%; width: 100%;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../static/img/dut2.jpg" style="margin-top: 15px; height: 75%; width: 100%;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../static/img/dut3.jpg" style="margin-top: 15px; height: 75%; width: 100%;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../static/img/dut4.jpg" style="margin-top: 15px; height: 75%; width: 100%;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="../static/img/dut5.jpg" style="margin-top: 15px; height: 75%; width: 100%;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="margin-top: 10px;">
+                    <h4><strong>Nghiên cứu khoa học là gì</strong></h4>
+                    <p class="text-muted" style="text-align: justify;">
+                        Nghiên cứu khoa học là loại hoạt động tự phát hiện, tìm hiểu các hiện tượng, sự vật, quy luật của tự nhiên, xã hội và tư duy. Nhằm sáng tạo các giải pháp ứng dụng chúng vào hoạt động thực tiễn
+                    </p>
+                    <h4><strong>Tầm quan trọng và lợi ích của nghiên cứu khoa học?</strong></p>
+                    </h4>
+                    <p class="text-muted" style="text-align: justify;">
+                        Nghiên cứu khoa học giúp chúng ta tăng lên về lượng kiến thức và kinh nghiệm nghiên cứu, không ngừng bổ sung, hoàn thiện bản thân. Nghiên cứu khoa học giúp chúng ta tăng cường tư duy phản biên, tăng cường khả năng quản lý thời gian, làm việc nhóm... Đặc
+                        biệt là khả năng tư duy độc lập, sáng tạo, nhìn nhận các sự vật, sự việc ở nhiều khía cạnh khác nhau.
+                    </p>
+                    <h4 style="text-align: justify;"><strong>Một số các hoạt động nổi bật của trường Đại học bách khoa</strong></p>
+                    </h4>
+                    <p class="text-muted" style="text-align: justify;">
+
+                    </p>
+                </div>
+            </div>
+            <hr class="my-5" />
+            <!--Section: Content-->
+            <section class="text-center">
+                <h4 class="mb-5"><strong>Danh sách thành viên nhóm</strong></h4>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="card" style="width: 18rem;">
+                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                <img src="../static/img/tinh.jpg" class="img-thumbnail" />
+                                <a href="#!">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Nguyễn Thanh Tính</h5>
+                                <p class="card-text">
+                                    Thành viên của lớp 18TCLC-Nhật
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="card" style="width: 18rem; margin-left: 20%;">
+                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                <img src="../static/img/tung (1).jpg" class="img-thumbnail" />
+                                <a href="#!">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Lương Quang Tùng</h5>
+                                <p class="card-text">
+                                    Thành viên của lớp 18TCLC-Nhật
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="card" style="width: 18rem; margin-left: 32.5%;">
+                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                <img src="../static/img/nghia.jpg" class="img-thumbnail" />
+                                <a href="#!">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Phạm Trần Nhân Nghĩa</h5>
+                                <p class="card-text">
+                                    Thành viên của lớp 18TCLC-Nhật
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <div style="margin-top: 5%;">
+        <hr>
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12">
+                    <h5>Liên lạc với nhóm</h5>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="https://www.facebook.com/Duawww"><i class="fab fa-facebook"></i></a>
+                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="https://www.instagram.com/duaww/"><i class="fab fa-instagram"></i></a>
+                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="https://www.youtube.com/watch?v=LMnJG3Oxrrw"><i class="fab fa-youtube"></i></a>
+                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p >
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+<script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+</body>
+
+</html>

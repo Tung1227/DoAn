@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm lĩnh vực cho đề tài</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <div id="page-content-wrapper">
+            <div class="container-fluid form-text">
+                <div class="row">
+                    <div class="col-sm-4">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <h3 style="margin-top: 20px; font-size: xx-large; color: black; ">Thêm lĩnh vực cho đề tài</h3>
+                        <!-- Form sửa thông tin -->
+                        <form name="formThemLinhVuc" th:action="@{'/themLinhVucDeTai/' + ${idDeTai} + '/' + ${accViewer}}" method="post" onsubmit="return validateForm()">
+                            <!-- Tên -->
+                            <div th:each="list : ${linhvuc}">
+                                <label for="" style="font-size: medium; color: black;" th:text="${list.getTenLinhVuc()}"></label>
+                                <input type="checkbox" class="checkList" th:value="${list.getIDLinhVuc()}" style=" border-radius: 10px; margin-top: 10px; width: 40%;; height: 20px; margin-left: -10%;">
+                            </div>
+                            <span th:field="${checked}">
+                                <input type="hidden" name="checked" th:value="${checked}" class="form-control">
+                            </span>
+                            <button type="submit" class="btn btn-primary" name="btnsubmit" style="margin-top: 20px; border-radius: 10px; width: 60%;">Thêm thông tin</button>
+                        </form>
+                    </div>
+                    <div class="col-sm-4">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container form-text">
+
+        </div>
+        <script th:inline="javascript">
+            function validateForm() {
+                let Checked = "";
+                var inputElements = document.getElementsByClassName('checkList');
+                for (var i = 0; i < inputElements.length; i++) {
+                    if (inputElements[i].checked) {
+
+                        Checked = Checked + "/" + inputElements[i].value;
+                    }
+                }
+                if (Checked === "") {
+                    alert("Hãy chọn lĩnh vực cho đề tài");
+                    return false;
+                }
+                alert("thêm đề tài thành công");
+                document.forms["formThemLinhVuc"]["checked"].value = Checked;
+                return true;
+            }
+        </script>
+        <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+</body>
+
+</html>

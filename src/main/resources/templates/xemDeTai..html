@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Xem đề tài</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/xemDeTai.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+</head>
+
+<body>
+            <div class="xemDeTai" >
+                <h3 >Đề tài</h3>
+                <div >
+                    <p th:text="'Tên : ' + ${detai.getTenDeTai()}"></p>
+                    <label for="" >Mô tả</label>
+                    <textarea th:text=" ${detai.getMoTa()}" class="form-control" ></textarea>
+                    <div>
+                        <span th:if="${nguoiHuongDan.getTen()}" th:text="'Người hướng dẫn : ' + ${nguoiHuongDan.getTen()}"></span>
+                        <span th:if="!${nguoiHuongDan.getTen()}" th:text="'Người hướng dẫn : Chưa có người hướng dẫn'"></span>
+                    </div>
+                    <div>
+                        <p th:if="${nguoithuchien.getTen()}" th:text="'Người thực hiện đề tài : ' + ${nguoithuchien.getTen()}"></p>
+                        <p th:if="!${nguoithuchien.getTen()}" th:text="'Người thực hiện đề tài : Chưa có người thực hiện'"></p>
+                    </div>
+                    <label style=" font-size: larger; color:black;">Lĩnh vực :</label>
+                    <select>
+                        <option th:each="linhvuc : ${linhVucCuaDeTai}" th:text="${linhvuc.getTenLinhVuc()}"></option>
+                    </select>
+                    <p class="button"></p>
+                <a th:href="@{'/' + ${pageold} + '/'+ ${detai.getIDDeTai()}}" class="btn btn-primary" >Trở về</a>
+            </p>
+                </div>
+            </div>
+            
+
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+</body>
+
+</html>

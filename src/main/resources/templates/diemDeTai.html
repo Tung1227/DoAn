@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đề tài</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style2.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/responsive.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <a href="#" , class="navbar-branch">
+            <img src="../static/img/dhbk.png" height="60" alt="#">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right:12%; margin-left: 0%;">
+            <div class="navbar-collapse" >
+                <ul id="nav" class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Tài khoản</a>
+                        <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
+                            <li style="height: 40%; width: 100%;">
+                                <a th:href="@{'/doimatkhau/' + ${accViewer.getTaiKhoan()}}">Đổi mật khẩu</a>
+                            </li>
+                            <li>
+                                <a th:href="@{'/changePersonInfo/' + ${accViewer.getTaiKhoan()}}">Thay đổi thông tin cá nhân</a>
+                            </li>
+                            <li>
+                                <a th:href="@{'/login'}">Đăng xuất</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link " th:href="@{ '/hoidongchamthi/' + ${accViewer.getTaiKhoan()}} ">Hội đồng chấm thi</a></li>
+                    <li><a href="#">Đề tài</a>
+                        <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
+                            <li>
+                                <a th:href="@{ '/listDeTai/' + ${accViewer.getTaiKhoan()}} " style="width:100%">Danh sách đề tài</a>
+                            </li>
+                            <li>
+                                <a th:href="@{ '/dangThucHien/' + ${accViewer.getTaiKhoan()}} " style="width:100%">Danh sách đề tài đang thực hiện</a>
+                            </li>
+                            <li>
+                                <a th:href="@{ '/daHoanThanh/' + ${accViewer.getTaiKhoan()}} " style="width:100%">Danh sách đề tài đã hoàn thành</a>
+                            </li>
+                            <li><a class="nav-link " th:href="@{ '/danhsachdacham/' + ${accViewer.getTaiKhoan()}} ">Danh sách đề tài đã chấm</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid form-text">
+        <h3 th:text="${detai.getTenDeTai()}" style="margin-top: 20px;color: black; margin-left: 12.5%;"></h3>
+    </div>
+    <div class="container-fluid">
+        <div th:if="${danhSachNguoiCham}">
+            <div class="table-responsive" style="margin-top: 20px;">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr style="background-color: #BE81F7;">
+                            <th scope="col">Tên cán bộ chấm</th>
+                            <th scope="col">Số điểm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <tr th:each="element : ${danhSachNguoiCham}">
+                                <td th:text="${element.first.getTen()}"></td>
+                                <td th:text="${element.second}"></td>
+                            </tr>
+                        </tr>
+                    </tbody>
+                </table>
+                <form name="formNghiemThu" th:action="@{'/diemDeTai/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" style="margin-top: 20px;" method="post" onsubmit="return validateForm()">
+                    <input type="submit" name="nghiemThu" value="Nghiệm thu đề tài" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px; width: 13%; margin-left: 12.5%;">
+                </form>
+                <a th:href="@{'/hoidong/' + ${viewer.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px; width: 13%; margin-left: 12.5%;">Trở về</a>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 17%;">
+        <hr>
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12">
+                    <h5>Liên lạc với nhóm</h5>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="https://www.facebook.com/Duawww"><i class="fab fa-facebook"></i></a>
+                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="https://www.instagram.com/duaww/"><i class="fab fa-instagram"></i></a>
+                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="https://www.youtube.com/watch?v=LMnJG3Oxrrw"><i class="fab fa-youtube"></i></a>
+                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script th:inline="javascript">
+        function validateForm() {
+            var hoanthanh = [
+                [$ {
+                    hoanthanh
+                }]
+            ];
+            if (hoanthanh) {
+                alert("Đề tài đã được nghiệm thu");
+                return false;
+            } else {
+                var conFirm = confirm("Bạn có chắc muốn nghiệm thu đề tài ?");
+                if (conFirm) {
+                    alert("Nghiệm thu thành công");
+                    return true;
+                }
+                return false;
+            }
+        }
+    </script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+</body>
+
+</html>

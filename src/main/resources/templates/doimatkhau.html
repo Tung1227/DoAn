@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đổi mật mật khẩu</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styleDMK.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+
+</head>
+
+<body>
+    <div class="signup">
+        <h3 class="signup-heading">Đổi mật khẩu</h3>
+        <!-- Form đổi mật khẩu -->
+        <form name="changePass" th:action="@{/doimatkhau/{account}(account=${user.getTaiKhoan()})}" action="#" th:object="${user}" onsubmit="return validateForm()" method="POST" class="form_group">
+            <div class="form_group">
+                <label for="" class="form_label">Mật khẩu hiện tại</label>
+                <span th:field="${oldPass}">
+                                    <input name="oldPass" type="password" th:value="${oldPass}" class="input_text  form-control">
+                                </span>
+            </div>
+            <div class="form_group">
+                <label for="" class="form_label">Mật khẩu mới</label>
+                <input name="newPass" type="password" class="input_text  form-control">
+            </div>
+            <div class="form_group">
+                <label for="" class="form_label">Xác nhận mật khẩu</label>
+                <!-- Mới sửa cái ni từ label thành span -->
+                <span th:field="${user.getMatKhau()}"><input name="MatKhau" value="" type="password"  class="input_text  form-control"></span>
+            </div>
+            <p class="button">
+                <input type="submit" value="Đổi mật khẩu" class="btn btn-primary">
+                <a th:href="@{'/'+ ${pageold} + '/' + ${user.getTaiKhoan()}}" class="btn btn-dark">Trở về</a>
+            </p>
+            
+        </form>
+    </div>
+
+    <script th:inline="javascript">
+        window.onload = function() {
+            var truePass = [
+                [$ {
+                    truePass
+                }]
+            ];
+            if (truePass === false) {
+                alert("Mật khẩu hiện tại không đúng");
+            } else if (truePass === true) {
+                alert("Đổi mật khẩu thành công");
+            }
+
+        }
+
+        function validateForm() {
+            let pass = document.forms["changePass"]["oldPass"].value;
+            let newPass = document.forms["changePass"]["newPass"].value;
+            let confirmPass = document.forms["changePass"]["MatKhau"].value;
+            if (pass == "" || newPass == "" || confirmPass == "") {
+                alert("Hãy nhập mật khẩu");
+                return false;
+            }
+            if (newPass.length < 8 || confirmPass.length < 8) {
+                alert("Mật khẩu nhập vào phải ít nhất 8 kí tự");
+                return false;
+            }
+            if (newPass !== confirmPass) {
+                alert("Xác nhận mật khẩu không trùng khớp");
+                return false;
+            }
+            var confirmForm = confirm("Bạn chắc chắn muốn thay đổi mật khẩu ?");
+            if (confirmForm) {
+                return true;
+            }
+            return false;
+        }
+    </script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
+</body>
+
+</html>

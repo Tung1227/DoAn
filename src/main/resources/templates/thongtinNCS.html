@@ -1,0 +1,88 @@
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Thông tin nghiên cứu sinh</title>
+        <!-- Import boostrap and Jquery -->
+        <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+        <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+        <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+        <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/thongtinNCS.css">k
+        <!-- Tạo icon trên Title -->
+        <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+        <!-- Branch -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+
+    </head>
+
+    <body>
+        <div class="ThongtinNCS">
+        <h3 >Thông tin cá nhân</h5>
+            <!-- Form sửa thông tin -->
+            <form th:object="${user}">
+                <!-- Têm -->
+                <div class="form_group">
+                    <label for="">Tên</label>
+                    <span th:field="*{Ten}">
+                    <input name="Ten" type="text" th:value="*{Ten}" class="form-control" >
+            </span>
+                </div>
+                <!-- Ngày sinh -->
+                <div class="form_group">
+                    <label for="">Ngày sinh</label>
+                    <span th:field="*{NgaySinh}">
+                    <input name="NgaySinh" type="text" th:value="*{NgaySinh}" class="form-control">
+            </span>
+                </div>
+
+                <!-- Giới tính -->
+                <div class="form_group">
+                    <label for="">Giới tính: </label>
+                    <span th:field="*{GioiTinh}">
+                    <input type="hidden" name="GioiTinh" th:value="*{GioiTinh}">
+                    <span> Nam
+                        <input type="radio" name="checkboxSex" value="nam" th:checked="*{GioiTinh} ? 'checked'" />
+                    </span>
+                    <span> Nữ
+                        <input type="radio" name="checkboxSex" value="nu"  th:checked="!*{GioiTinh} ? 'checked'" />
+                    </span>
+                    </span>
+                </div>
+                <!--Địa chỉ( Sửa label thành span)  -->
+                <div class="form_group">
+                    <label>Địa chỉ</label>
+                    <span th:field="*{DiaChi}">
+                    <input name="DiaChi" type="text" th:value="*{DiaChi}" class="form-control">
+            </span>
+                </div>
+                <!-- Số điện thoại -->
+                <div class="form_group">
+                    <label for="">Số điện thoại</label>
+                    <span th:field="*{SDT}">
+                    <input name="SDT" type="text" th:value="*{SDT}" class="form-control">
+            </span>
+                </div>
+                <!-- Gmail -->
+                <div class="form_group">
+                    <label for="">Gmail</label>
+                    <span th:field="*{Gmail}">
+                    <input name="Gmail" type="text" th:value="*{Gmail}" class="form-control">
+            </span>
+                </div>
+                <p class="button">
+                    <a th:href="@{ '/'+ ${pageold} +'/' + ${nguoihuongdan.getTaiKhoan()}}" class="btn btn-primary" >Trở về</a>
+                </p>
+                <!-- Nút sửa thông tin -->
+                <!-- Trở về(back) chưa xong -->
+                
+            </form>
+        </div>
+        <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+        <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+    </body>
+
+    </html>

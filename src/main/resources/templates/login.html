@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href="/.././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+</head>
+
+<body>
+
+    <div class="container-fluid bg">
+        <div class="row" style="margin-top: 3%;">
+            <!-- Chia 2 cot bang nhau -->
+            <div class="col-sm-5 login-section-wrapper">
+                <div class="login-wrapper my-auto">
+                    <h1 class="login-title" style="margin-inline: 150px;">Đăng nhập</h1>
+                    <form th:action="@{/j_spring_security_check}"  method="POST" onsubmit="return validateForm()">
+                        <div class="form-group">
+<!--                            <label for="TaiKhoan">Tài khoản</label>-->
+                            <input type="text" name="username" class="form-control" placeholder="Nhập tài khoản">
+                        </div>
+                        <div class="form-group mb-4" style="margin-top: 3%;">
+<!--                            <label for="password">Mật khẩu</label>-->
+                            <input type="password" name="password" class="form-control" placeholder="Nhập mật khẩu của bạn tại đây">
+                        </div>
+                        <input type="submit" value="Đăng nhập" class="btn btn-primary" style="width: 100%;">
+                    </form>
+                    <a th:href="@{'/dangky'}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 49%; text-align: center;">Đăng kí tài khoản</a>
+                    <a href="#!" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 50%; text-align: center;">Quên mật khẩu?</a>
+                    <p class="login-wrapper-footer-text" style="margin-top: 3%;">Bạn không có tài khoản? <a href="#!" class="text-reset">Đăng kí tại đây</a> </p>
+                </div>
+                <hr>
+                <div>
+                    <div class="container-fluid padding">
+                        <div class="row text-center padding">
+                            <div class="col-12">
+                                <h5>Liên lạc với nhóm</h5>
+                            </div>
+                            <div class="col-md-4 social padding">
+                                <a href="#"><i class="fab fa-facebook"></i></a>
+                            </div>
+                            <div class="col-md-4 social padding">
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                            <div class="col-md-4 social padding">
+                                <a href="#"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Chia 2 cot bang nhau -->
+            <div class="col-sm-7">
+                <div id="slides"  class="carousel slide"  data-ride="carousel">
+                    <ul class="carousel-indicators">
+                        <li data-target="#slides"  data-slide-to="0" , class="active"></li>
+                        <li data-target="#slides"  data-slide-to="1"></li>
+                        <li data-target="#slides"  data-slide-to="2"></li>
+                        <li data-target="#slides"  data-slide-to="3"></li>
+                    </ul>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="/../static/img/hinhanh5.jpg" style="margin-top: 15px;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/../static/img/hinhanh6.jpg" style="margin-top: 15px;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/../static/img/hinhanh7.jpg" style="margin-top: 15px;">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="/../static/img/hinhanh8.jpg" style="margin-top: 15px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script th:inline="javascript">
+        window.onload = function () {
+            var wrongAcc = [[${wrongAcc}]];
+            var locked = [[${locked}]];
+            if (wrongAcc === true) {
+                alert("Sai tài khoản hoặc mật khẩu");
+            }
+            if (locked === true) {
+                alert("Tài khoản đã bị khóa");
+            }
+        }
+        function validateForm() {
+            var input = document.getElementsByTagName("input");
+            var arrayConverted = Object.values(input);
+            var filterArray = arrayConverted.filter((element) => {
+                return element.type !== "hidden";
+            });
+
+            for (var i = 0; i < filterArray.length; i++) {
+                if ( filterArray[i].value === "") {
+                    alert("Xin hãy nhập đầy đủ thông tin");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+    </script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+</body>
+
+</html>
